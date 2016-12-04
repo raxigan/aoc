@@ -16,10 +16,8 @@ val threeRowChunks = triangleSpecs.grouped(3).toList
 val triangleSpecs2 = threeRowChunks.flatMap(l => get3Triangles(l))
 triangleSpecs2.count(s => isTriangle(s(0), s(1), s(2)))
 
-def get3Triangles(rows: List[List[Int]]): List[List[Int]] = {
-  List(List(rows(0)(0), rows(1)(0), rows(2)(0)),
-    List(rows(0)(1), rows(1)(1), rows(2)(1)),
-    List(rows(0)(2), rows(1)(2), rows(2)(2))
-  )
+def get3Triangles(rows: List[List[Int]]): List[Seq[Int]] = {
+  val r = 0 to 2
+  List(r.map(rows(_)(0)), r.map(rows(_)(1)), r.map(rows(_)(2)))
 }
 
