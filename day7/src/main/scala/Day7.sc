@@ -24,7 +24,7 @@ def supportsTLS(line: String): Boolean = {
 }
 
 def supportsSSL(line: String): Boolean = {
-  val splitted: List[String] = line.split("[\\[\\]]").toList
+  val splitted = line.split("[\\[\\]]").toList
   val hypernet = splitted.zipWithIndex.filter(_._2 % 2 == 1).map(_._1).mkString
   splitted.indices.exists(k => k % 2 == 0 && hastAbaAndBab(splitted(k), 1, hypernet))
 }
@@ -37,7 +37,7 @@ def hasAbba(ln: String, ix: Int = 1): Boolean = {
 
 def hastAbaAndBab(ln: String, ix: Int = 1, hypernet: String): Boolean = {
   if (ix + 1 >= ln.length) return false
-  if (isAba(ln, ix) && hypernet.contains(toBab(ln.substring(ix-1, ix+2)))) true
+  if (isAbba(ln, ix, 1) && hypernet.contains(toBab(ln.substring(ix - 1, ix + 2)))) true
   else hastAbaAndBab(ln, ix + 1, hypernet)
 }
 
@@ -45,12 +45,7 @@ def toBab(aba: String) = {
   aba.tail + aba(1)
 }
 
-def isAbba(ln: String, ix: Int) = {
-  val let = ln.substring(ix-1, ix+3)
+def isAbba(ln: String, ix: Int, cons: Int = 2) = {
+  val let = ln.substring(ix - 1, ix + cons + 1)
   let == let.reverse && let(0) != let(1)
-}
-
-def isAba(ln: String, ix: Int) = {
-  val let = ln.substring(ix-1, ix+2)
-  (let == let.reverse) && let(0) != let(1)
 }
