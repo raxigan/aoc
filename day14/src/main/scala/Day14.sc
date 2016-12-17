@@ -35,9 +35,7 @@ def isKey(md5: String, id: Int): Boolean = {
   if (cons.isEmpty) false
   else {
     (id + 1 until 1000 + id)
-      .map(i => hashes(i))
-      .find(k => contains5(k, cons.get._1))
-      .isDefined
+      .map(i => hashes(i)).exists(k => contains5(k, cons.get._1))
   }
 }
 
