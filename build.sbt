@@ -1,4 +1,4 @@
-name := "aoc2016"
+name := "aoc"
 
 version := "1.0"
 
